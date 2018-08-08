@@ -27,7 +27,7 @@
 // THE SOFTWARE.
 
 import UIKit
-//import WHC_Layout
+import WHC_Layout
 
 public class WHC_PageViewLayoutParam: WHC_TitlesBarLayoutParam {
     /// 标题栏高度
@@ -162,32 +162,32 @@ public class WHC_PageView: UIView, UIScrollViewDelegate {
     
     
     private func handleTitleItemClick(animation: Bool, index: Int) {
-        isBigSwitch = true
-        let replaceViewPosition = {(symbol: Int) -> Void in
-            let pageIndex = self.currentPageIndex + symbol
-            let currentView = self.scrollView.viewWithTag(pageIndex + 1)
-            let replaceView = self.scrollView.viewWithTag(index + 1)
-            let currentViewX = currentView!.whc_x
-            self.replaceTag1 = currentView!.tag
-            self.replaceTag2 = replaceView!.tag
-            currentView?.whc_x = (replaceView?.whc_x)!
-            replaceView?.whc_x = currentViewX
-            self.scrollView.setContentOffset(CGPoint(x: CGFloat(self.currentPageIndex + symbol) * self.whc_w, y: 0), animated: animation)
-        }
-        if index > currentPageIndex + 1 {
-            replaceViewPosition(1)
-        }else if index < currentPageIndex - 1 {
-            replaceViewPosition(-1)
-        }else {
-            isBigSwitch = false
-            let scrollWidth = CGFloat(index) * scrollView.whc_w
-            scrollView.setContentOffset(CGPoint(x: scrollWidth, y: 0), animated: animation)
-        }
+        //        isBigSwitch = true
+        //        let replaceViewPosition = {(symbol: Int) -> Void in
+        //            let pageIndex = self.currentPageIndex + symbol
+        //            let currentView = self.scrollView.viewWithTag(pageIndex + 1)
+        //            let replaceView = self.scrollView.viewWithTag(index + 1)
+        //            let currentViewX = currentView!.whc_x
+        //            self.replaceTag1 = currentView!.tag
+        //            self.replaceTag2 = replaceView!.tag
+        //            currentView?.whc_x = (replaceView?.whc_x)!
+        //            replaceView?.whc_x = currentViewX
+        //            self.scrollView.setContentOffset(CGPoint(x: CGFloat(self.currentPageIndex + symbol) * self.whc_w, y: 0), animated: animation)
+        //        }
+        //        if index > currentPageIndex + 1 {
+        //            replaceViewPosition(1)
+        //        }else if index < currentPageIndex - 1 {
+        //            replaceViewPosition(-1)
+        //        }else {
+        isBigSwitch = false
+        let scrollWidth = CGFloat(index) * scrollView.whc_w
+        scrollView.setContentOffset(CGPoint(x: scrollWidth, y: 0), animated: animation)
+        //        }
         titleBar.resetItemState(currentIndex: index, oldIndex: currentPageIndex)
         currentPageIndex = index
     }
     
-    private func handleScrollStop() {
+    public func handleScrollStop() {
         let pageIndex = Int(floor((scrollView.contentOffset.x - scrollView.whc_w / 2.0) / scrollView.whc_w)) + 1
         if pageIndex != currentPageIndex {
             delegate?.whcPageView?(self, willUpdateView: views[pageIndex], index: pageIndex)
@@ -245,4 +245,3 @@ public class WHC_PageView: UIView, UIScrollViewDelegate {
         
     }
 }
-
