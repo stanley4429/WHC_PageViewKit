@@ -28,7 +28,7 @@
 
 
 import UIKit
-//import WHC_Layout
+import WHC_Layout
 
 private class ButtonTopRightMarkView: UIView {}
 
@@ -177,7 +177,7 @@ public class WHC_TitlesBar: UIView {
             }else {
                 itemWidth = layoutParam.itemWidth
             }
-            backView.whc_w = itemWidth * CGFloat(titleCount)
+            backView.whc_w = max(itemWidth * CGFloat(titleCount),UIScreen.main.bounds.width)
             scrollView.contentSize = CGSize(width: backView.whc_w, height: 0)
             if layoutParam.bottomLineHeight != WHC_TitlesBarLayoutParam.kNotCreateLine {
                 bottomLineHeight = layoutParam.bottomLineHeight
