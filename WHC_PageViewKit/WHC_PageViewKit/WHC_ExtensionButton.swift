@@ -84,14 +84,14 @@ public extension UIButton {
             }else {
                 let txt: NSString = NSString(cString: (self.currentTitle!.cString(using: String.Encoding.utf8))!,
                                              encoding: String.Encoding.utf8.rawValue)!;
-                return txt.size(withAttributes: [NSAttributedStringKey.font:(self.titleLabel?.font)!]);
+                return txt.size(withAttributes: [NSAttributedString.Key.font:(self.titleLabel?.font)!]);
             }
         }
         return CGSize.zero;
     }
     
-   public func imageSize() -> CGSize {
-        let image = self.image(for: UIControlState())
+    public func imageSize() -> CGSize {
+        let image = self.image(for: UIControl.State())
         if image != nil {
             return image!.size
         }

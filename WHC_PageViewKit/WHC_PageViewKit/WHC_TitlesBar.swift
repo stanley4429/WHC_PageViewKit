@@ -269,7 +269,7 @@ public class WHC_TitlesBar: UIView {
             for text in layoutParam.highlightTexts {
                 if title.contains(text) {
                     let attrTitle = NSMutableAttributedString(string: title)
-                    attrTitle.addAttribute(NSAttributedStringKey.foregroundColor, value: layoutParam.highlightTextColor, range: NSMakeRange(title.count - text.count, text.count))
+                    attrTitle.addAttribute(NSAttributedString.Key.foregroundColor, value: layoutParam.highlightTextColor, range: NSMakeRange(title.count - text.count, text.count))
                     button.setAttributedTitle(attrTitle, for: .normal)
                     button.setAttributedTitle(attrTitle, for: .selected)
                     break
@@ -444,7 +444,7 @@ public class WHC_TitlesBar: UIView {
         var pageIndex = Int(contentOffsetX / self.whc_w) + 1
         let currentButton = buttons[pageIndex - 1]
         let rightSwitch = draggingX < 0
-        var percent = fabs((cursorMoveOffsetX - tempItemWidth * CGFloat(pageIndex - 1)) / tempItemWidth)
+        var percent = abs((cursorMoveOffsetX - tempItemWidth * CGFloat(pageIndex - 1)) / tempItemWidth)
         if rightSwitch && Int(contentOffsetX) % Int(self.whc_w) == 0 {
             percent = 1
             if pageIndex > 1 {
@@ -526,7 +526,7 @@ public class WHC_TitlesBar: UIView {
         var markView: ButtonTopRightMarkView!
         for view in button.subviews {
             if view is ButtonTopRightMarkView {
-                markView = view as! ButtonTopRightMarkView
+                markView = view as? ButtonTopRightMarkView
                 markView.whc_ResetConstraints().removeFromSuperview()
                 break
             }
@@ -554,4 +554,5 @@ public class WHC_TitlesBar: UIView {
         }
     }
 }
+
 
